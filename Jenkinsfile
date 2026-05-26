@@ -8,11 +8,7 @@ pipeline {
     stages {
 
         stage('Build') {
-            agent {
-                dockerContainer {
-                    image 'python:3.11'
-                }
-            }
+                agent any
 
             steps {
                 echo "Building.."
@@ -25,11 +21,7 @@ pipeline {
         }
 
         stage('Test') {
-            agent {
-                dockerContainer {
-                    image 'python:3.11'
-                }
-            }
+           
 
             steps {
                 echo "Testing.."
