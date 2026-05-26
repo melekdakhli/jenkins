@@ -9,7 +9,7 @@ pipeline {
 
         stage('Build') {
             agent {
-                docker {
+                dockerContainer {
                     image 'python:3.11'
                 }
             }
@@ -26,7 +26,7 @@ pipeline {
 
         stage('Test') {
             agent {
-                docker {
+                dockerContainer {
                     image 'python:3.11'
                 }
             }
