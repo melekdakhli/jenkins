@@ -1,33 +1,43 @@
 pipeline {
     agent none
-   triggers {
-       pollSCM '* * * * *'
-   }
+
+    triggers {
+        pollSCM('* * * * *')
+    }
+
     stages {
 
         stage('Build') {
-            agent any
+            agent {
+                docker {
+                    image 'python:3.11'
+                }
+            }
 
             steps {
                 echo "Building.."
 
                 sh '''
-                cd myapp
-                pip install -r requirements.txt
+                    cd myapp
+                    pip install -r requirements.txt
                 '''
             }
         }
 
         stage('Test') {
-            agent any
+            agent {
+                docker {
+                    image 'python:3.11'
+                }
+            }
 
             steps {
                 echo "Testing.."
 
                 sh '''
-                cd myapp
-                python3 hello.py
-                python3 hello.py --name=Brad
+                    cd myapp
+                    python hello.py
+                    python hello.py --name=Brad
                 '''
             }
         }
